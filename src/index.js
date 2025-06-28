@@ -34,3 +34,20 @@ dotenv.config({
 import connectDB from "./database/index.js";
 // Call the connectDB function to connect to the database
 connectDB();
+
+
+//when database get connected it return a promise so we can use  {.then() and .catch()} to handle the success and failure of the connection
+connectDB()
+.then(()=>{
+    app.on("error", (error) => {
+        console.error("Server error:", error);
+        process.exit(1); // Exit the process with failure
+    })
+    app.listen(`${process.env.PORT || 3000}`, ()=> {
+        console.log(`Server is running on port ${process.env.PORT || 3000}`);
+    });
+})
+.catch((error)=>{
+    console.error("Failed to connect to the database", error);
+    process.exit(1); // Exit the process with failure
+});
