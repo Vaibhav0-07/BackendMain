@@ -3,7 +3,7 @@ class APIresponses {
         this.statusCode = statusCode,
         this.data = data,
         this.message = message,
-        this.success = statusCode < 400    // Since whenever the API response is success we always have statusCode less then 400
+        this.success = statusCode < 400 // Since whenever the API response is success we always have statusCode less then 400
     }
 }
 
