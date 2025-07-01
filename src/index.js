@@ -1,6 +1,10 @@
 import dotenv from "dotenv";
-import {DB_NAME} from "./constants.js";
-import mongoose, { connect } from "mongoose";
+import {app} from "./app.js"; //we forgot to import the app in the index file due to which throwing an error
+// Type of error: Failed to connect to the database ReferenceError: app is not defined
+
+
+//import {DB_NAME} from "./constants.js";
+//import mongoose, { connect } from "mongoose";
 dotenv.config({
     path: ".env",
 });
@@ -12,7 +16,7 @@ dotenv.config({
     * The connection string is stored in the .env file.
     * The MONGODB_URI constant is used to specify the MongoDB URI.
     * The DB_NAME constant is used to specify the name of the database.
- */
+*/
 
 
 /*
