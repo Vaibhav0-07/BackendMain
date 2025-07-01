@@ -13,7 +13,8 @@
 */
 
 const asyncHandler = (functionASParameter) => {
-    (req, res, next) => {
+    //Type of Error was : argument handler must be a function because we did not returned the function & it is a higher order function
+    return (req, res, next) => {
         Promise.resolve(functionASParameter(req, res, next))
         .catch((error) => next(error))
     }
