@@ -29,12 +29,12 @@ const registerUser = asyncHandler(async(req, res) => {
 */
 
     //OR use this syntax
-    if([username, email, fullname, password].some((fields) => fields?.trim === "")){
+    if([username, email, fullname, password].some((fields) => fields?.trim() === "")){
         //Checking all fields that after trimming they are empty if yes then throwing error
         throw new APIerror(400, "All fields are required");
     }
     
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         $or:[{ username }, { email }],
     })
 
@@ -48,11 +48,12 @@ const registerUser = asyncHandler(async(req, res) => {
     if(!avatarLocalPath){
         throw new APIerror(400, "Avatar file is required !");
     }
-
+    
     const avatar = await uploadOnCloudinary(avatarLocalPath);
-    const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+    const coverImage = await uploadOnCloudinary(coverImageLocalPath);   
 
-    if(!avatar){
+    if(!avatar){// was throwing error because we did not returned the response from cloudinary utility
+                // (/utils/cloudinary.js) after successfully uploading the file to cloudinary.
         throw new APIerror(400, "Avatar file is required !");
     }
 
