@@ -37,7 +37,7 @@ dotenv.config({
 // Approach 2 for db connection will be in database folder of src folder
 import connectDB from "./database/index.js";
 // Call the connectDB function to connect to the database
-connectDB();
+//connectDB();
 
 
 //when database get connected it return a promise so we can use  {.then() and .catch()} to handle the success and failure of the connection
