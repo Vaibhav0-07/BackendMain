@@ -59,7 +59,7 @@ userSchema.pre("save", async function(next){
     // now the pre hook will not hash the password if there is no change is password field.
         
 
-    this.password = bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
     next();
         //In Mongoose middleware, next() is how you tell Mongoose:
         // I’m done with whatever work I needed to do now move on to the next middleware 
