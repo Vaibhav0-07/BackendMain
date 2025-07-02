@@ -4,8 +4,8 @@ import fs from 'fs';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: CLOUDINARY_API_KEY,
-    api_secret: CLOUDINARY_API_SECRET
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 
@@ -18,6 +18,10 @@ const uploadOnCloudinary = async (localFilePath) => { //can take time and can th
         const response = await cloudinary.uploader.upload(localFilePath,{
             resource_type: "auto",
         });
+        console.log("File successfully uploaded on cloudinary !", response.secure_url);
+        //printing success message after successful upload of file
+        return response;
+        // due to this 
     }
     catch (error) {
         fs.unlinkSync(localFilePath); //to remove the locally uploaded file synchronously means first remove the file
@@ -25,3 +29,5 @@ const uploadOnCloudinary = async (localFilePath) => { //can take time and can th
         return null;
     }
 }
+
+export { uploadOnCloudinary }
