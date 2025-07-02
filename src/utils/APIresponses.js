@@ -7,6 +7,8 @@ class APIresponses {
     }
 }
 
+export { APIresponses }
+
 
 // Ranges of statusCode
 /*
